@@ -20,7 +20,7 @@ comm = MPI.COMM_WORLD
 rank = comm.Get_rank()
 size = comm.Get_size()
 
-N_CLIENTS = 4
+N_CLIENTS = 2
 N_SERVERS = size - N_CLIENTS
 LEADER = N_CLIENTS
 
