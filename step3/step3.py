@@ -86,9 +86,10 @@ if rank < N_CLIENTS:
             if speed == "low":
                 time.sleep(10)
             elif speed == "medium":
-                time.sleep(2)
+                time.sleep(5)
             elif speed == "high":
-                time.sleep(0.5)
+                time.sleep(1)
+
         elif command_index >= len(client_commands):
             for server in range(N_CLIENTS, N_CLIENTS + N_SERVERS):
                 comm.send("FINISHED", dest=server, tag=rank)
@@ -101,11 +102,35 @@ elif rank >= N_CLIENTS:
     finished_clients = 0
 
     while finished_clients < N_CLIENTS:
-        for client in range(N_CLIENTS):
-            received_command = comm.recv(source=client, tag=client)
-            if received_command == "FINISHED":
-                finished_clients += 1
-            else:
-                log.append(received_command)
+        repl_command = read_last_command()
+        if repl_command and repl_command != last_command:
+            parts = repl_command.split()
+            if parts[0] == "SPEED":
+                if len(parts) == 2:
+                    speed = parts[1]
+                    print(f"Serveur {rank}: Vitesse définie à {speed}")
+                elif len(parts) == 3 and int(parts[1]) == rank:
+                    speed = parts[2]
+                    print(f"Serveur {rank}: Vitesse spécifique définie à {speed}")
+            elif parts[0] == "CRASH":
+                if len(parts) == 1 or (len(parts) == 2 and int(parts[1]) == rank):
+                    is_crashed = True
+                    print(f"Serveur {rank}: En état de crash.")
+            last_command = repl_command
+
+        if not is_crashed:
+            for client in range(N_CLIENTS):
+                received_command = comm.recv(source=client, tag=client)
+                if received_command == "FINISHED":
+                    finished_clients += 1
+                else:
+                    log.append(received_command)
+
+            if speed == "low":
+                time.sleep(10)
+            elif speed == "medium":
+                time.sleep(5)
+            elif speed == "high":
+                time.sleep(1)
 
     write_log_to_file(rank, log)
