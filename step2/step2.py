@@ -105,4 +105,7 @@ elif rank >= N_CLIENTS:
                 log.append(received_command)
                 print(f"Serveur {rank} a reçu la commande: {received_command}")
 
-            write_log_to_file(rank, log)
+        if has_started and len(log) >= N_CLIENTS:
+            break
+
+    write_log_to_file(rank, log)
