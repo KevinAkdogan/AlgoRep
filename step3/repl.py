@@ -31,7 +31,7 @@ def is_valid_command(command):
 
 
 def main():
-    history_file = "repl_history.txt"
+    history_file = "step3/repl_history.txt"
     has_started = False
     while True:
         command = input("REPL> ").strip()

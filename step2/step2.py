@@ -17,7 +17,7 @@ def write_log_to_file(rk, lg):
 
 
 def read_last_command():
-    filename = "repl_history.txt"
+    filename = "step2/repl_history.txt"
     if os.path.exists(filename):
         with open(filename, "r") as f:
             commands = f.readlines()
