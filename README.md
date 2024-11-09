@@ -3,13 +3,19 @@
 ## Commandes pour les steps
 
 - **Step 1** (2 clients et 2 serveurs):
-  ```bash
-  mpirun -np 4 python3 step1/step1.py
+  make step1
 
 - **Step 2** (2 clients et 2 serveurs):
-  ```bash
-  mpirun -np 4 python3 step2/step2.py
-  python3 step2/repl.py
+  make step2
+  in an other terminal : python3 step2/repl.py
+
+- **Step 3** (2 clients et 2 serveurs):
+  make step3
+  in an other terminal : python3 step3/repl.py
+
+- **Step 4** (2 clients et 2 serveurs):
+  make step4
+  in an other terminal : python3 step4/repl.py
 
 ### Liste des participants: 
 * Noé Pechereau
