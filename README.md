@@ -17,6 +17,8 @@
   make step4
   in an other terminal : python3 step4/repl.py
 
+- **Interface**: python3 bonus/interface.py
+
 ### Liste des participants: 
 * Noé Pechereau
 * Kévin Berkant Akdogan
